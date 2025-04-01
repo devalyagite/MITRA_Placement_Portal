@@ -1,0 +1,94 @@
+{% include 'user_navbar.html' %}
+
+<!-- Main Content -->
+<div class="main-content">
+    <div class="header text-center">Apply for Job</div>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <!-- Job Profile Section -->
+    <div class="job-card d-flex align-items-center">
+        <!-- Company Logo with Fallback -->
+        {% if job['resume'] %}
+            <img src="{{ url_for('static', filename='uploads/' + job['resume']) }}" alt="Company Logo" class="company-logo">
+        {% else %}
+            <img src="{{ url_for('static', filename='uploads/default-logo.png') }}" alt="Default Logo" class="company-logo">
+        {% endif %}
+
+        <!-- Job Info -->
+        <div class="flex-grow-1">
+            <h4>{{ job['title'] }}</h4>
+            <p><strong>{{ job['cname'] }}</strong> | <span class="text-success">{{ job['jobtype'] }}</span></p>
+            <p><i class="fas fa-dollar-sign"></i> Salary: ₹{{ job['salary'] }} / year</p>
+            <p>{{ job['location'] }}</p>
+            <p>{{ job['description'] }}</p>
+        </div>
+    </div>
+
+    <!-- Application Form -->
+    <div class="apply-container">
+        <h2 class="text-center mb-4">Job Application Form</h2>
+        <form action="" method="POST" enctype="multipart/form-data">
+
+            <div class="form-group">
+                <label for="ssc">SSC Percentage:</label>
+                <input type="number" step="0.01" class="form-control" id="ssc" name="ssc"
+                       value="{{ education['ssc'] if education else '' }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="hsc">HSC Percentage:</label>
+                <input type="number" step="0.01" class="form-control" id="hsc" name="hsc"
+                       value="{{ education['hsc'] if education else '' }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="cgpa">Pointer (CGPA):</label>
+                <input type="number" step="0.01" class="form-control" id="cgpa" name="cgpa"
+                       value="{{ education['cgpa'] if education else '' }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="aggregate">Aggregate Percentage:</label>
+                <input type="number" step="0.01" class="form-control" id="aggregate" name="aggregate"
+                       value="{{ education['aggregate'] if education else '' }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="branch">Branch:</label>
+                <select class="form-control" id="branch" name="branch" required>
+                    <option value="Computer Science" {% if education and education['branch'] == "Computer Science" %}selected{% endif %}>Computer Science</option>
+                    <option value="Information Technology" {% if education and education['branch'] == "Information Technology" %}selected{% endif %}>Information Technology</option>
+                    <option value="Electronics & Telecommunication" {% if education and education['branch'] == "Electronics & Telecommunication" %}selected{% endif %}>Electronics & Telecommunication</option>
+                    <option value="Mechanical Engineering" {% if education and education['branch'] == "Mechanical Engineering" %}selected{% endif %}>Mechanical Engineering</option>
+                    <option value="Civil Engineering" {% if education and education['branch'] == "Civil Engineering" %}selected{% endif %}>Civil Engineering</option>
+                    <option value="Electrical Engineering" {% if education and education['branch'] == "Electrical Engineering" %}selected{% endif %}>Electrical Engineering</option>
+                    <option value="Chemical Engineering" {% if education and education['branch'] == "Chemical Engineering" %}selected{% endif %}>Chemical Engineering</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="year">Year:</label>
+                <input type="number" class="form-control" id="year" name="year"
+                       value="{{ education['year'] if education else '' }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="resume">Upload Resume:</label>
+                <input type="file" class="form-control" id="resume" name="resume" accept=".pdf,.doc,.docx" required>
+            </div>
+
+            <button type="submit" class="btn-submit mt-3">Submit Application</button>
+        </form>
+    </div>
+</div>

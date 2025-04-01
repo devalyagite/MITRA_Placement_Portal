@@ -1,0 +1,17 @@
+tqdm
+matplotlib
+numpy
+pandas
+opencv-python
+flask
+pillow
+joblib
+scipy
+scikit-learn
+
+
+
+
+
+
+https://blog.cloudflare.com/50-most-impersonated-brands-protect-phishing/

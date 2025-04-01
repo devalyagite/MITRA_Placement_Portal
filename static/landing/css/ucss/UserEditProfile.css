@@ -1,0 +1,207 @@
+/* Root Variables for Colors */
+:root {
+  --primary: #00B074;
+  --light: #EFFDF5;
+  --dark: #333333;
+  --light-shadow: rgba(0, 176, 116, 0.2);
+  --card-background: #ffffff;
+  --card-shadow: rgba(0, 0, 0, 0.1);
+}
+
+/* Basic Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f4f9;
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar Styles */
+/* Sidebar Styles */
+.sidebar {
+  width: 250px;
+  background: linear-gradient(135deg, #00B074, #4caf50); /* Linear gradient background */
+  padding: 20px;
+  position: fixed;
+  height: 100%;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar .profile {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.sidebar .profile img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.sidebar .profile h3 {
+  color: white;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.sidebar h2 {
+  color: white;
+  font-size: 2em;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin-top: 10px;
+}
+
+.sidebar ul li a {
+  text-decoration: none;
+  color: white;
+  font-size: 1.2em;
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, padding-left 0.3s ease;
+}
+
+.sidebar ul li a i {
+  margin-right: 15px; /* Space between icon and text */
+  font-size: 1.5em;
+}
+
+.sidebar ul li a:hover {
+  background-color: #4caf50; /* Darker green on hover */
+  color: white;
+  padding-left: 20px; /* Add space when hovered */
+}
+
+
+/* Main Content Styles */
+.main-content {
+  margin-left: 250px; /* Offset for sidebar */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+/* Header Styles */
+.header {
+  background-color: var(--light);
+  color: var(--primary);
+  text-align: center;
+  padding: 40px 20px;
+  font-size: 3em;
+  font-weight: bold;
+  border-bottom: 2px solid var(--primary);
+  box-shadow: 0 4px 6px var(--light-shadow);
+}
+
+/* Edit Profile Form Styles */
+.edit-profile-container {
+display: flex;
+justify-content: center;
+padding: 20px 0;
+}
+
+.card {
+background-color: var(--card-background);
+border-radius: 10px;
+box-shadow: 0 4px 6px var(--card-shadow);
+padding: 20px;
+width: 50%;
+text-align: center;
+transition: transform 0.3s ease-in-out;
+}
+
+.card-title {
+font-size: 1.8em;
+color: var(--primary);
+margin-bottom: 20px;
+}
+
+.card-content {
+font-size: 1.2em;
+color: var(--dark);
+}
+
+.form-group {
+margin-bottom: 20px;
+text-align: left;
+}
+
+.form-group label {
+display: block;
+margin-bottom: 8px;
+font-size: 1.1em;
+}
+
+.form-group input,
+.form-group textarea {
+width: 100%;
+padding: 12px;
+font-size: 1em;
+border: 1px solid #ccc;
+border-radius: 8px;
+}
+
+.form-group textarea {
+resize: vertical;
+}
+
+/* Profile Photo Input Styling */
+.form-group input[type="file"] {
+padding: 6px;
+font-size: 1em;
+border: 1px solid #ccc;
+border-radius: 8px;
+background-color: #f4f4f9;
+cursor: pointer;
+}
+
+.form-group input[type="file"]:hover {
+background-color: #e9e9e9;
+}
+
+/* Button Styling */
+.btn {
+background-color: var(--primary);
+color: white;
+padding: 12px 20px;
+font-size: 1.2em;
+border: none;
+border-radius: 8px;
+cursor: pointer;
+transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+background-color: #009E5A;
+}
+
+/* Responsive Design for Form */
+@media (max-width: 768px) {
+.card {
+  width: 80%;
+}
+}
+
+@media (max-width: 480px) {
+.card {
+  width: 100%;
+}
+}

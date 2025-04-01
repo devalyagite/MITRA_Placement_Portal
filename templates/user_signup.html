@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Update</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+<!--    <link rel="stylesheet" type="text/css" href="/static/assets/login_style.css">-->
+    <style>
+        body {
+            background: linear-gradient(to right, #4A90E2, #1E3C72);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .formbg {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            width: 350px;
+            text-align: center;
+        }
+        .formbg-inner span {
+            font-size: 22px;
+            font-weight: bold;
+            color: #333;
+        }
+        input[type="text"], input[type="email"], input[type="password"], input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+        input[type="submit"] {
+            background: #4A90E2;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        input[type="submit"]:hover {
+            background: #357ABD;
+        }
+        .reset-pass a, .footer-link a {
+            color: #4A90E2;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .reset-pass a:hover, .footer-link a:hover {
+            text-decoration: underline;
+        }
+        .alert {
+            padding: 15px;
+            background: #FF5252;
+            color: white;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .closebtn {
+            float: right;
+            font-size: 18px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="formbg">
+        <div class="formbg-inner">
+            <span>Sign up to your account</span>
+            <center>
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="alert">
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                        {% for message in messages %}
+                            {{ message }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                {% endwith %}
+            </center>
+            <form id="stripe-login" action="{{ url_for('signup') }}" method="post">
+                <input type="text" name="username" placeholder="Username">
+                <input type="email" name="email" placeholder="Email">
+                <input type="password" name="password" placeholder="Password">
+                <input type="text" name="phone" placeholder="Mobile">
+                <input type="text" name="address" placeholder="Address">
+                <input type="submit" name="submit" value="Signup">
+            </form>
+            <div class="footer-link">
+                <h5>Do have an account? <a href="{{ url_for('login') }}">Click here</a> to login</h5>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

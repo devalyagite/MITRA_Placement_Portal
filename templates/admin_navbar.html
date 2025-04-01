@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mitra Placement Portal - Admin Dashboard</title>
+
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* General Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      display: flex;
+      background: #f4f7f6;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 250px;
+      height: 100vh;
+      background: #1e1e2f;
+      color: white;
+      position: fixed;
+      padding-top: 20px;
+      transition: 0.3s;
+    }
+
+    .sidebar .profile {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .sidebar .profile img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 3px solid white;
+    }
+
+    .sidebar h3 {
+      font-size: 20px;
+      margin-top: 10px;
+      color: #FFD700;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar ul li {
+      padding: 12px 20px;
+      transition: 0.3s;
+    }
+
+    .sidebar ul li a {
+      color: white;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    .sidebar ul li a i {
+      margin-right: 10px;
+    }
+
+    .sidebar ul li:hover {
+      background-color: #FFD700;
+      border-left: 5px solid white;
+    }
+
+    .sidebar ul li:hover a {
+      color: #252542;
+    }
+
+    /* Main Content */
+    .content {
+      margin-left: 270px;
+      padding: 20px;
+      width: 100%;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: #252542;
+      padding: 12px;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 5px;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      margin-right: 20px;
+      transition: 0.3s;
+    }
+
+    .navbar a:hover {
+      color: #FFD700;
+      transform: scale(1.1);
+    }
+
+    /* Dashboard Cards */
+    .dashboard {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .card i {
+      font-size: 2rem;
+      color: #FFD700;
+    }
+
+    .card h3 {
+      font-size: 20px;
+      margin-top: 10px;
+    }
+
+    .card p {
+      font-size: 16px;
+      margin-top: 5px;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="profile">
+      <img src="/static/landing/img/dummyimg.jpg" alt="Admin Photo">
+      <h3>Admin Name</h3>
+    </div>
+
+    <ul>
+      <li><a href="/admin_dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+      <li><a href="/admin_add_job_post"><i class="fas fa-briefcase"></i> Add Post</a></li>
+      <li><a href="/admin_view_jobs"><i class="fas fa-file-alt"></i> Show Post</a></li>
+      <li><a href="/admin_job_post_all_view"><i class="fas fa-users"></i> Applicants for Job</a></li>
+      <li><a href="/admin_view_students"><i class="fas fa-sort"></i> Student List</a></li>
+      <li><a href="/admin_student_criteria"><i class="fas fa-file-alt"></i> Sort </a></li>
+
+<!--      <li><a href="AdminSearch.html"><i class="fas fa-search"></i> Search</a></li>-->
+      <li><a href="/"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+    </ul>
+  </div>
+
+  <!-- Main Content -->
+  <div class="content">
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="container-fluid">
+        <span>Welcome, Admin</span>
+        <div>
+          <a href="#"><i class="fas fa-bell"></i> Notifications</a>
+          <a href="#"><i class="fas fa-user"></i> Profile</a>
+          <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+      </div>
+    </nav>

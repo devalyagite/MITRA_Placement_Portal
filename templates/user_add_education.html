@@ -1,0 +1,157 @@
+{% include 'user_navbar.html' %}
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Education Details</h2>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <!-- Education Details Table -->
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>SSC (%)</th>
+                    <th>HSC (%)</th>
+                    <th>CGPA</th>
+                    <th>Aggregate (%)</th>
+                    <th>Branch</th>
+                    <th>Year</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for edu in education_details %}
+                <tr>
+                    <td>{{ edu['ssc'] }}</td>
+                    <td>{{ edu['hsc'] }}</td>
+                    <td>{{ edu['cgpa'] }}</td>
+                    <td>{{ edu['aggregate'] }}</td>
+                    <td>{{ edu['branch'] }}</td>
+                    <td>{{ edu['year'] }}</td>
+                    <td>
+                        <form action="{{ url_for('delete_education', edu_id=edu['id']) }}" method="POST" class="d-inline">
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this education record?');">
+                                <i class="fas fa-trash-alt"></i> Delete
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <h3 class="text-center mt-4">Add New Education Details</h3>
+
+    <!-- Add Education Form -->
+    <form action="" method="POST">
+        <div class="form-group">
+            <label for="ssc">SSC Percentage:</label>
+            <input type="number" step="0.01" class="form-control" id="ssc" name="ssc" required>
+        </div>
+
+        <div class="form-group">
+            <label for="hsc">HSC Percentage:</label>
+            <input type="number" step="0.01" class="form-control" id="hsc" name="hsc" required>
+        </div>
+
+        <div class="form-group">
+            <label for="cgpa">CGPA:</label>
+            <input type="number" step="0.01" class="form-control" id="cgpa" name="cgpa" required>
+        </div>
+
+        <div class="form-group">
+            <label for="aggregate">Aggregate Percentage:</label>
+            <input type="number" step="0.01" class="form-control" id="aggregate" name="aggregate" required>
+        </div>
+
+        <div class="form-group">
+            <label for="branch">Branch:</label>
+            <select class="form-control" id="branch" name="branch" required>
+                <option value="Computer Science">Computer Science</option>
+                <option value="Information Technology">Information Technology</option>
+                <option value="Electronics & Telecommunication">Electronics & Telecommunication</option>
+                <option value="Mechanical Engineering">Mechanical Engineering</option>
+                <option value="Civil Engineering">Civil Engineering</option>
+                <option value="Electrical Engineering">Electrical Engineering</option>
+                <option value="Chemical Engineering">Chemical Engineering</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="year">Year of Completion:</label>
+            <input type="number" class="form-control" id="year" name="year" required>
+        </div>
+
+        <button type="submit" class="btn btn-success mt-3">Save Education</button>
+    </form>
+</div>
+
+<style>
+    .container {
+        max-width: 800px;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .table {
+        background: white;
+        border-radius: 10px;
+    }
+
+    .thead-dark {
+        background: #343a40;
+        color: white;
+    }
+
+    .btn-danger {
+        background: #dc3545;
+        color: white;
+        border-radius: 5px;
+        transition: 0.3s;
+    }
+
+    .btn-danger:hover {
+        background: #c82333;
+    }
+
+    .btn-success {
+        width: 100%;
+        background: #28a745;
+        color: white;
+        padding: 10px;
+        border: none;
+        font-size: 16px;
+        border-radius: 5px;
+    }
+
+    .btn-success:hover {
+        background: #218838;
+    }
+
+    .alert {
+        padding: 15px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+    }
+</style>
+
+<script>
+    // Auto-close flash messages after 5 seconds
+    setTimeout(() => {
+        let alerts = document.querySelectorAll('.alert');
+        alerts.forEach(alert => alert.remove());
+    }, 5000);
+</script>

@@ -1,0 +1,130 @@
+{% include 'admin_navbar.html' %}
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">All Students & Applied Jobs</h2>
+
+    <!-- Search Bar -->
+    <div class="search-container">
+        <input type="text" id="searchInput" class="form-control" placeholder="Search by name, email, or phone...">
+    </div>
+
+    <div class="student-list" id="studentList">
+        {% for student in students %}
+        <div class="student-card">
+            <div class="student-info">
+                <h4 class="student-name">{{ student['username'] }}</h4>
+                <p class="student-email"><strong>Email:</strong> {{ student['email'] }}</p>
+                <p class="student-phone"><strong>Phone:</strong> {{ student['phone'] }}</p>
+                <p><strong>Address:</strong> {{ student['address'] }}</p>
+            </div>
+
+            <div class="student-stats">
+                <span class="badge">{{ student['total_applied_jobs'] }} Jobs Applied</span>
+
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: #f8f9fa;
+    }
+
+    .container {
+        max-width: 90%;
+        margin: auto;
+        padding: 20px;
+    }
+
+    /* Search Bar */
+    .search-container {
+        max-width: 400px;
+        margin: 0 auto 20px;
+    }
+
+    .student-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+    }
+
+    .student-card {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: 0.3s;
+    }
+
+    .student-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .student-info h4 {
+        margin: 0;
+        color: #252542;
+    }
+
+    .student-info p {
+        margin: 5px 0;
+        font-size: 14px;
+        color: #666;
+    }
+
+    .student-stats {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .badge {
+        background: #007bff;
+        color: white;
+        padding: 8px 12px;
+        border-radius: 5px;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .btn-view {
+        margin-top: 10px;
+        background: #17a2b8;
+        color: white;
+        padding: 8px 12px;
+        border-radius: 5px;
+        text-decoration: none;
+        display: inline-block;
+        transition: 0.3s;
+    }
+
+    .btn-view:hover {
+        background: #138496;
+    }
+</style>
+
+<!-- JavaScript for Search Functionality -->
+<script>
+    document.getElementById("searchInput").addEventListener("input", function () {
+        let searchValue = this.value.toLowerCase();
+        let students = document.querySelectorAll(".student-card");
+
+        students.forEach(student => {
+            let name = student.querySelector(".student-name").textContent.toLowerCase();
+            let email = student.querySelector(".student-email").textContent.toLowerCase();
+            let phone = student.querySelector(".student-phone").textContent.toLowerCase();
+
+            if (name.includes(searchValue) || email.includes(searchValue) || phone.includes(searchValue)) {
+                student.style.display = "flex";
+            } else {
+                student.style.display = "none";
+            }
+        });
+    });
+</script>

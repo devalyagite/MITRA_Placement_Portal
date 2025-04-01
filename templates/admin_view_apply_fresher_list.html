@@ -1,0 +1,199 @@
+{% include 'admin_navbar.html' %}
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Freshers Applied for Job</h2>
+
+    <table class="table table-hover table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Applicant</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>SSC (%)</th>
+                <th>HSC (%)</th>
+                <th>CGPA</th>
+                <th>Branch</th>
+                <th>Year</th>
+                <th>Status</th>
+                <th>Resume</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for fresher in freshers %}
+            <tr>
+                <td>{{ fresher['id'] }}</td>
+                <td>{{ fresher['username'] }}</td>
+                <td>{{ fresher['email'] }}</td>
+                <td>{{ fresher['phone'] }}</td>
+                <td>{{ fresher['ssc'] }}</td>
+                <td>{{ fresher['hsc'] }}</td>
+                <td>{{ fresher['cgpa'] }}</td>
+                <td>{{ fresher['branch'] }}</td>
+                <td>{{ fresher['year'] }}</td>
+                <td>
+                    <span class="status-badge {{ fresher['status'].lower() }}">
+                        {{ fresher['status'] }}
+                    </span>
+                </td>
+                <td>
+                    {% if fresher['user_resume'] %}
+                        <a href="{{ url_for('static', filename='uploads/' + fresher['user_resume']) }}" target="_blank" class="btn btn-sm btn-info">
+                            <i class="fas fa-eye"></i> View
+                        </a>
+                        <a href="{{ url_for('static', filename='uploads/' + fresher['user_resume']) }}" download class="btn btn-sm btn-primary">
+                            <i class="fas fa-download"></i> Download
+                        </a>
+                    {% else %}
+                        <span class="text-muted">No Resume</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <button class="btn btn-sm btn-warning" onclick="openStatusModal({{ fresher['id'] }}, '{{ fresher['status'] }}')">
+                        <i class="fas fa-edit"></i> Change Status
+                    </button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Status Change Modal -->
+<div id="statusModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeStatusModal()">&times;</span>
+        <h3>Change Application Status</h3>
+        <form id="statusForm">
+            <input type="hidden" id="applicantId">
+            <label for="status">Select Status:</label>
+            <select id="status" class="form-control">
+                <option value="Pending">Pending</option>
+                <option value="Accepted">Accepted</option>
+                <option value="Rejected">Rejected</option>
+            </select>
+            <button type="submit" class="btn btn-success mt-3">Update Status</button>
+        </form>
+    </div>
+</div>
+
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: #f8f9fa;
+    }
+
+    .container {
+
+        margin: auto;
+        padding: 5px;
+    }
+
+    .table {
+        width: 100%;
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .thead-dark {
+        background: #343a40;
+        color: white;
+    }
+
+    .table-hover tbody tr:hover {
+        background: #f1f1f1;
+    }
+
+    .status-badge {
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    .pending {
+        background: #ffc107;
+        color: black;
+    }
+
+    .accepted {
+        background: #28a745;
+        color: white;
+    }
+
+    .rejected {
+        background: #dc3545;
+        color: white;
+    }
+
+    /* Modal Styles */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        max-width: 400px;
+        margin: 100px auto;
+        text-align: center;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .close {
+        float: right;
+        font-size: 25px;
+        cursor: pointer;
+    }
+
+    .close:hover {
+        color: red;
+    }
+</style>
+
+<script>
+    function openStatusModal(applicantId, currentStatus) {
+        document.getElementById("applicantId").value = applicantId;
+        document.getElementById("status").value = currentStatus;
+        document.getElementById("statusModal").style.display = "block";
+    }
+
+    function closeStatusModal() {
+        document.getElementById("statusModal").style.display = "none";
+    }
+
+    document.getElementById("statusForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+        let applicantId = document.getElementById("applicantId").value;
+        let newStatus = document.getElementById("status").value;
+
+        fetch('/update_application_status', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id: applicantId, status: newStatus })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert("Application status updated successfully!");
+                location.reload();
+            } else {
+                alert("Failed to update status. Try again.");
+            }
+        })
+        .catch(error => console.error("Error:", error));
+
+        closeStatusModal();
+    });
+</script>

@@ -1,0 +1,119 @@
+{% include 'admin_navbar.html' %}
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">All Job Listings</h2>
+
+    <table class="job-table">
+        <thead>
+            <tr>
+                <th>Logo</th>
+                <th>Job Title</th>
+                <th>Company</th>
+                <th>Location</th>
+                <th>Type</th>
+                <th>Salary</th>
+                <th>Date Posted</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for job in jobs %}
+            <tr>
+                <!-- Company Logo -->
+                <td class="logo-cell">
+                    {% if job['resume'] %}
+                        <img src="{{ url_for('static', filename='uploads/' + job['resume']) }}" alt="Company Logo" class="company-logo">
+                    {% else %}
+                        <img src="{{ url_for('static', filename='uploads/default-logo.png') }}" alt="Default Logo" class="company-logo">
+                    {% endif %}
+                </td>
+
+                <!-- Job Info -->
+                <td>{{ job['title'] }}</td>
+                <td>{{ job['cname'] }}</td>
+                <td>{{ job['location'] }}</td>
+                <td>{{ job['jobtype'] }}</td>
+                <td>₹{{ job['salary'] }}</td>
+                <td>{{ job['date'].strftime('%d-%m-%Y') }}</td>
+
+                <!-- Actions -->
+                <td>
+                    <button class="btn-delete" onclick="confirmDelete({{ job['job_id'] }})">
+                        <i class="fas fa-trash-alt"></i> Delete
+                    </button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: #f8f9fa;
+    }
+
+    .container {
+        max-width: 95%;
+        margin: auto;
+        padding: 20px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .job-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    .job-table th, .job-table td {
+        padding: 12px;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .job-table th {
+        background: #252542;
+        color: white;
+    }
+
+    .job-table tr:hover {
+        background: #f2f2f2;
+    }
+
+    .logo-cell {
+        text-align: center;
+    }
+
+    .company-logo {
+        width: 50px;
+        height: 50px;
+        border-radius: 5px;
+        object-fit: cover;
+    }
+
+    .btn-delete {
+        padding: 8px 12px;
+        background: #dc3545;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .btn-delete:hover {
+        background: #c82333;
+    }
+</style>
+
+<script>
+    function confirmDelete(jobId) {
+        if (confirm("Are you sure you want to delete this job?")) {
+            window.location.href = "/admin_delete_job/" + jobId;
+        }
+    }
+</script>

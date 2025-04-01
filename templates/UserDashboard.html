@@ -1,0 +1,38 @@
+{% include 'user_navbar.html' %}
+
+
+ <!-- Dashboard Cards -->
+    <div class="container mt-4">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card shadow-sm p-3 bg-primary text-white">
+            <div class="d-flex align-items-center">
+              <i class="fas fa-briefcase"></i>
+              <div class="ms-3">
+                <h5>Available Jobs</h5>
+                <p class="mb-0">{{total_job}} Openings</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card shadow-sm p-3 bg-success text-white">
+            <div class="d-flex align-items-center">
+              <i class="fas fa-paper-plane"></i>
+              <div class="ms-3">
+                <h5>My Applications</h5>
+                <p class="mb-0">{{total_job1}} Submitted</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+</body>
+</html>
+

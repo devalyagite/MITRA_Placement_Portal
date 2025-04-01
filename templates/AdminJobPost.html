@@ -1,0 +1,151 @@
+{% include 'admin_navbar.html' %}
+
+<style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+    }
+    .main-content {
+      margin-left: 250px;
+      padding: 20px;
+    }
+    .job-post-container {
+      max-width: 600px;
+      margin: 50px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .form-group label {
+      font-weight: bold;
+    }
+    .btn-submit {
+      background-color: #007bff;
+      color: white;
+      padding: 10px;
+      width: 100%;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .btn-submit:hover {
+      background-color: #0056b3;
+    }
+    .img-preview {
+      display: none;
+      max-width: 150px;
+      margin-top: 10px;
+    }
+</style>
+
+<!-- Bootstrap & Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+<!-- Main Content -->
+<div class="main-content">
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <!-- Job Post Form -->
+    <div class="job-post-container">
+      <h4 class="text-center">Create a New Job Post</h4>
+      <form action="{{ url_for('admin_add_job_post') }}" method="POST" enctype="multipart/form-data">
+
+        <div class="mb-3">
+          <label for="job-title" class="form-label">Job Title:</label>
+          <input type="text" class="form-control" id="job-title" name="job-title" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="job-description" class="form-label">Job Description:</label>
+          <textarea class="form-control" id="job-description" name="job-description" rows="4" required></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label for="job-location" class="form-label">Job Location:</label>
+          <input type="text" class="form-control" id="job-location" name="job-location" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="job-category" class="form-label">Job Category:</label>
+          <select class="form-select" id="job-category" name="job-category" required>
+            <option value="IT">IT</option>
+            <option value="BPO">BPO</option>
+            <option value="Non-IT">Non-IT</option>
+            <option value="Accounts">Accounts</option>
+            <option value="Healthcare">Healthcare</option>
+            <option value="Marketing">Marketing</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="job-type" class="form-label">Job Type:</label>
+          <select class="form-select" id="job-type" name="job-type" required>
+            <option value="full-time">Full-time</option>
+            <option value="part-time">Part-time</option>
+            <option value="contract">Contract</option>
+            <option value="internship">Internship</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="salary" class="form-label">Salary:</label>
+          <input type="number" class="form-control" id="salary" name="salary" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="job-company" class="form-label">Company Name:</label>
+          <input type="text" class="form-control" id="job-company" name="company" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="company-logo" class="form-label">Upload Company Logo:</label>
+          <input type="file" class="form-control" id="company-logo" name="resume" accept="image/*" onchange="previewLogo(event)">
+        </div>
+
+        <div class="text-center">
+          <img id="logo-preview" class="img-preview" src="" alt="Logo Preview">
+        </div>
+
+        <button type="submit" class="btn-submit mt-3">Post Job</button>
+      </form>
+    </div>
+</div>
+
+<!-- JavaScript for Image Preview -->
+<script>
+    function previewLogo(event) {
+      var preview = document.getElementById('logo-preview');
+      var file = event.target.files[0];
+
+      if (file) {
+        var reader = new FileReader();
+        reader.onload = function () {
+          preview.src = reader.result;
+          preview.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+      } else {
+        preview.style.display = 'none';
+      }
+    }
+</script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

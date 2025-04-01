@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Admin Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* Body Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1e1e2f, #252542);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Wrapper */
+        .wrapper {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.3);
+            width: 350px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Title */
+        h3 {
+            font-size: 26px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #FFD700;
+        }
+
+        /* Form Styling */
+        .form-holder {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .form-holder input {
+            width: 100%;
+            padding: 12px;
+            padding-left: 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .form-holder input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .form-holder span {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+        }
+
+        /* Button */
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            background: #FFD700;
+            color: #252542;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #ffc107;
+            transform: scale(1.05);
+        }
+
+        /* Flash Message */
+        .alert {
+            padding: 15px;
+            background-color: #28a745;
+            color: white;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        .closebtn {
+            margin-left: 15px;
+            color: white;
+            font-weight: bold;
+            float: right;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        /* Exit Link */
+        .exit-link {
+            display: block;
+            margin-top: 10px;
+            color: #FFD700;
+            text-decoration: none;
+        }
+
+        .exit-link:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <!-- Flash Messages -->
+        <center>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="alert">
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% endwith %}
+        </center>
+
+        <!-- Login Form -->
+        <form action="" method="post">
+            <h3>Admin Login</h3>
+
+            <div class="form-holder">
+                <span><i class="fas fa-user"></i></span>
+                <input type="text" class="form-control" placeholder="Username" name="username" required>
+            </div>
+
+            <div class="form-holder">
+                <span><i class="fas fa-lock"></i></span>
+                <input type="password" class="form-control" placeholder="Password" name="password" required>
+            </div>
+
+            <button type="submit">
+                <i class="fas fa-sign-in-alt"></i> Admin Login
+            </button>
+        </form>
+
+        <!-- Exit Link -->
+        <a href="/" class="exit-link">Exit Click Here</a>
+    </div>
+
+</body>
+</html>

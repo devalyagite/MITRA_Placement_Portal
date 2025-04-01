@@ -1,0 +1,212 @@
+/* Root Variables for Colors */
+:root {
+    --primary: #00B074;
+    --light: #EFFDF5;
+    --dark: #333333;
+    --light-shadow: rgba(0, 176, 116, 0.2);
+    --card-background: #ffffff;
+    --card-shadow: rgba(0, 0, 0, 0.1);
+}
+
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar Styles */
+/* Sidebar Styles */
+.sidebar {
+    width: 250px;
+    background: linear-gradient(135deg, #00B074, #4caf50); /* Linear gradient background */
+    padding: 20px;
+    position: fixed;
+    height: 100%;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar .profile {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.sidebar .profile img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.sidebar .profile h3 {
+    color: white;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.sidebar h2 {
+    color: white;
+    font-size: 2em;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin-top: 10px;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, padding-left 0.3s ease;
+}
+
+.sidebar ul li a i {
+    margin-right: 15px; /* Space between icon and text */
+    font-size: 1.5em;
+}
+
+.sidebar ul li a:hover {
+    background-color: #4caf50; /* Darker green on hover */
+    color: white;
+    padding-left: 20px; /* Add space when hovered */
+}
+
+
+/* Main Content Styles */
+.main-content {
+    margin-left: 250px; /* Offset for sidebar */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+/* Header Styles */
+.header {
+    background-color: var(--light);
+    color: var(--primary);
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 3em;
+    font-weight: bold;
+    border-bottom: 2px solid var(--primary);
+    box-shadow: 0 4px 6px var(--light-shadow);
+}
+
+/* Applied Jobs Section */
+.applied-jobs-container {
+    background-color: var(--card-background);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px var(--card-shadow);
+    max-width: 700px;
+    margin: 40px auto;
+    text-align: center;
+}
+
+.applied-jobs-container h2 {
+    font-size: 1.8em;
+    color: var(--primary);
+    margin-bottom: 15px;
+}
+
+/* Search Box */
+.search-box {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.search-box input {
+    padding: 10px;
+    font-size: 1.1em;
+    width: 50%;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: var(--primary);
+    color: white;
+}
+
+td {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+tr:nth-child(even) td {
+    background-color: #f4f4f4;
+}
+
+td img {
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+    .applied-jobs-container {
+        width: 90%;
+    }
+}
+
+@media (max-width: 768px) {
+    .applied-jobs-container {
+        width: 100%;
+    }
+
+    .sidebar {
+        width: 180px;
+    }
+
+    .main-content {
+        margin-left: 180px;
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+}

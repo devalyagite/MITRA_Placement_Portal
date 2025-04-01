@@ -1,0 +1,45 @@
+{% include 'admin_navbar.html' %}
+
+<!-- Flash Messages -->
+<div class="container mt-3">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</div>
+
+<!-- Dashboard Cards -->
+<div class="dashboard">
+    <div class="card">
+        <i class="fas fa-briefcase"></i>
+        <h3>Total Jobs</h3>
+        <p>{{total_job}} Active Jobs</p>
+    </div>
+
+    <div class="card">
+        <i class="fas fa-users"></i>
+        <h3>Total Applicants</h3>
+        <p>{{total_student}} Applications</p>
+    </div>
+
+    <div class="card">
+        <i class="fas fa-user-check"></i>
+        <h3>Selected Candidates</h3>
+        <p>80 Placed</p>
+    </div>
+
+    <div class="card">
+        <i class="fas fa-chart-line"></i>
+        <h3>Reports</h3>
+        <p>View Analytics</p>
+    </div>
+</div>
+
+</body>
+</html>

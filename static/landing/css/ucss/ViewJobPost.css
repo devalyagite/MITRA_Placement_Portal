@@ -1,0 +1,268 @@
+/* Root Variables for Colors */
+:root {
+    --primary: #00B074;
+    --light: #EFFDF5;
+    --dark: #333333;
+    --light-shadow: rgba(0, 176, 116, 0.2);
+    --card-background: #ffffff;
+    --card-shadow: rgba(0, 0, 0, 0.1);
+}
+
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar Styles */
+/* Sidebar Styles */
+.sidebar {
+    width: 250px;
+    background: linear-gradient(135deg, #00B074, #4caf50); /* Linear gradient background */
+    padding: 20px;
+    position: fixed;
+    height: 100%;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar .profile {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.sidebar .profile img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.sidebar .profile h3 {
+    color: white;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.sidebar h2 {
+    color: white;
+    font-size: 2em;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin-top: 10px;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, padding-left 0.3s ease;
+}
+
+.sidebar ul li a i {
+    margin-right: 15px; /* Space between icon and text */
+    font-size: 1.5em;
+}
+
+.sidebar ul li a:hover {
+    background-color: #4caf50; /* Darker green on hover */
+    color: white;
+    padding-left: 20px; /* Add space when hovered */
+}
+
+
+/* Main Content Styles */
+.main-content {
+    margin-left: 250px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+/* Header Styles */
+.header {
+    background-color: var(--light);
+    color: var(--primary);
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 3em;
+    font-weight: bold;
+    border-bottom: 2px solid var(--primary);
+    box-shadow: 0 4px 6px var(--light-shadow);
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+#searchInput {
+    width: 60%;
+    padding: 12px;
+    font-size: 1.2em;
+    border: 2px solid var(--primary);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px var(--card-shadow);
+    transition: 0.3s ease-in-out;
+}
+
+#searchInput:focus {
+    outline: none;
+    border-color: #009E5A;
+    box-shadow: 0 4px 10px rgba(0, 176, 116, 0.3);
+}
+
+
+
+/* Job Post List Styles */
+.job-posts-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+    padding: 20px 0;
+}
+
+/* Job Post Card Styles */
+.job-post-card {
+    background-color: var(--card-background);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px var(--card-shadow);
+    padding: 20px;
+    width: 100%;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.job-post-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Job Post Header */
+.job-post-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.company-logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.job-post-title {
+    text-align: left;
+}
+
+.job-post-title h2 {
+    font-size: 1.8em;
+    color: var(--primary);
+    margin-bottom: 5px;
+}
+
+.company-name {
+    font-size: 1.2em;
+    color: var(--dark);
+}
+
+/* Horizontal Layout for Job Details */
+.job-post-details-horizontal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.job-detail {
+    flex: 1;
+    min-width: 200px;
+    text-align: left;
+}
+
+.job-detail strong {
+    font-size: 1.1em;
+    color: var(--primary);
+}
+
+.job-detail p {
+    font-size: 1em;
+    color: var(--dark);
+}
+
+/* Apply Button */
+.apply-btn {
+    background-color: var(--primary);
+    color: white;
+    padding: 12px 20px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.apply-btn a{
+    text-decoration: none;
+    color: white;
+}
+.apply-btn:hover {
+    background-color: #009E5A;
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  .job-post-card {
+    width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 768px) {
+  .job-post-card {
+    width: 100%;
+  }
+
+  .sidebar {
+    width: 180px;
+  }
+
+  .main-content {
+    margin-left: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+}

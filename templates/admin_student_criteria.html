@@ -1,0 +1,163 @@
+{% include 'admin_navbar.html' %}
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4"><i class="fas fa-users"></i> Student Criteria Check</h2>
+
+    <!-- Search & Criteria Filter Form -->
+    <div class="card shadow-sm p-3">
+        <div class="row">
+            <div class="col-md-4">
+                <label><i class="fas fa-percentage"></i> Minimum SSC (%)</label>
+                <input type="number" step="0.01" class="form-control" id="searchSSC" placeholder="Enter SSC Criteria">
+            </div>
+            <div class="col-md-4">
+                <label><i class="fas fa-percentage"></i> Minimum HSC (%)</label>
+                <input type="number" step="0.01" class="form-control" id="searchHSC" placeholder="Enter HSC Criteria">
+            </div>
+            <div class="col-md-4">
+                <label><i class="fas fa-chart-line"></i> Minimum CGPA</label>
+                <input type="number" step="0.01" class="form-control" id="searchCGPA" placeholder="Enter CGPA Criteria">
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-4">
+                <label><i class="fas fa-percentage"></i> Minimum Aggregate (%)</label>
+                <input type="number" step="0.01" class="form-control" id="searchAggregate" placeholder="Enter Aggregate Criteria">
+            </div>
+            <div class="col-md-4">
+                <label><i class="fas fa-graduation-cap"></i> Branch</label>
+                <select class="form-control" id="searchBranch">
+                    <option value="">Select Branch</option>
+                    <option value="Computer Science">Computer Science</option>
+                    <option value="Information Technology">Information Technology</option>
+                    <option value="Electronics & Telecommunication">Electronics & Telecommunication</option>
+                    <option value="Mechanical Engineering">Mechanical Engineering</option>
+                    <option value="Civil Engineering">Civil Engineering</option>
+                    <option value="Electrical Engineering">Electrical Engineering</option>
+                    <option value="Chemical Engineering">Chemical Engineering</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label><i class="fas fa-calendar-alt"></i> Year</label>
+                <input type="number" class="form-control" id="searchYear" placeholder="Enter Year">
+            </div>
+        </div>
+        <button class="btn btn-primary mt-3 w-100" onclick="filterStudents()">
+            <i class="fas fa-search"></i> Search
+        </button>
+    </div>
+
+    <!-- Student List Table -->
+    <div class="table-responsive mt-4">
+        <table class="table table-hover table-bordered text-center" id="studentTable">
+            <thead class="table-dark">
+                <tr>
+                    <th><i class="fas fa-user"></i> Username</th>
+                    <th><i class="fas fa-envelope"></i> Email</th>
+                    <th><i class="fas fa-percentage"></i> SSC (%)</th>
+                    <th><i class="fas fa-percentage"></i> HSC (%)</th>
+                    <th><i class="fas fa-chart-line"></i> CGPA</th>
+                    <th><i class="fas fa-percentage"></i> Aggregate (%)</th>
+                    <th><i class="fas fa-graduation-cap"></i> Branch</th>
+                    <th><i class="fas fa-calendar-alt"></i> Year</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students %}
+                <tr class="student-row">
+                    <td class="username">{{ student['username'] }}</td>
+                    <td class="email">{{ student['email'] }}</td>
+                    <td class="ssc">{{ student['ssc'] }}</td>
+                    <td class="hsc">{{ student['hsc'] }}</td>
+                    <td class="cgpa">{{ student['cgpa'] }}</td>
+                    <td class="aggregate">{{ student['aggregate'] }}</td>
+                    <td class="branch">{{ student['branch'] }}</td>
+                    <td class="year">{{ student['year'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Bootstrap & Custom Styling -->
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: #f8f9fa;
+    }
+
+    .container {
+        max-width: 95%;
+        margin: auto;
+        padding: 20px;
+    }
+
+    .card {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .table {
+        background: white;
+        border-radius: 10px;
+    }
+
+    .table-dark {
+        background: #252542;
+        color: white;
+    }
+
+    .btn-primary {
+        background: #007bff;
+        color: white;
+        border-radius: 5px;
+    }
+
+    .btn-primary:hover {
+        background: #0056b3;
+    }
+
+    .alert {
+        padding: 15px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+    }
+</style>
+
+<!-- JavaScript for Instant Filtering -->
+<script>
+    function filterStudents() {
+        let sscValue = parseFloat(document.getElementById("searchSSC").value) || 0;
+        let hscValue = parseFloat(document.getElementById("searchHSC").value) || 0;
+        let cgpaValue = parseFloat(document.getElementById("searchCGPA").value) || 0;
+        let aggregateValue = parseFloat(document.getElementById("searchAggregate").value) || 0;
+        let branchValue = document.getElementById("searchBranch").value.toLowerCase();
+        let yearValue = document.getElementById("searchYear").value.trim();
+
+        let students = document.querySelectorAll(".student-row");
+
+        students.forEach(student => {
+            let ssc = parseFloat(student.querySelector(".ssc").textContent) || 0;
+            let hsc = parseFloat(student.querySelector(".hsc").textContent) || 0;
+            let cgpa = parseFloat(student.querySelector(".cgpa").textContent) || 0;
+            let aggregate = parseFloat(student.querySelector(".aggregate").textContent) || 0;
+            let branch = student.querySelector(".branch").textContent.toLowerCase();
+            let year = student.querySelector(".year").textContent.trim();
+
+            let matchesSSC = ssc >= sscValue;
+            let matchesHSC = hsc >= hscValue;
+            let matchesCGPA = cgpa >= cgpaValue;
+            let matchesAggregate = aggregate >= aggregateValue;
+            let matchesBranch = branchValue === "" || branch.includes(branchValue);
+            let matchesYear = yearValue === "" || year.includes(yearValue);
+
+            if (matchesSSC && matchesHSC && matchesCGPA && matchesAggregate && matchesBranch && matchesYear) {
+                student.style.display = "table-row";
+            } else {
+                student.style.display = "none";
+            }
+        });
+    }
+</script>

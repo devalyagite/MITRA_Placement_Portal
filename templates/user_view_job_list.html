@@ -1,0 +1,87 @@
+{% include 'user_navbar.html' %}
+
+<!-- Job List -->
+<div class="container mt-4">
+  <h2>Available Job Listings</h2>
+
+  <!-- Search Bar -->
+  <div class="search-container mb-4">
+      <input type="text" id="searchInput" class="form-control" placeholder="Search jobs by title, company, or location...">
+  </div>
+
+  <div id="jobList">
+    {% for job in jobs %}
+    <!-- Job Card -->
+    <div class="job-card d-flex align-items-center">
+      <!-- Company Logo with Fallback -->
+      {% if job[6] %}
+        <img src="{{ url_for('static', filename='uploads/' + job[6]) }}" alt="Company Logo" class="company-logo">
+      {% else %}
+        <img src="{{ url_for('static', filename='uploads/default-logo.png') }}" alt="Default Logo" class="company-logo">
+      {% endif %}
+
+      <!-- Job Info -->
+      <div class="flex-grow-1">
+        <h4 class="job-title">{{ job[1] }}</h4>
+        <p class="company-name"><strong>{{ job[9] }}</strong></p>
+        <p class="job-location"><i class="fas fa-map-marker-alt"></i> {{ job[3] }}</p>
+        <p><i class="fas fa-dollar-sign"></i> Salary: ₹{{ job[5] }} / year</p>
+        <p> <span class="text-success">{{ job[7] }}</span> |  {{ job[3] }}</p>
+      </div>
+
+      <!-- Apply Button -->
+      <a href="/user_apply_job/{{ job[0] }}" class="apply-btn btn btn-primary">Apply Now</a>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+    .search-container {
+        max-width: 500px;
+        margin: auto;
+    }
+    .job-card {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+    .company-logo {
+        width: 60px;
+        height: 60px;
+        border-radius: 10px;
+        margin-right: 15px;
+    }
+</style>
+
+<!-- ✅ Fixed JavaScript for Real-Time Job Search -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        console.log("JavaScript Loaded Successfully!");  // Debugging
+
+        let searchInput = document.getElementById("searchInput");
+        let jobs = document.querySelectorAll(".job-card");
+
+        searchInput.addEventListener("input", function () {
+            let searchValue = searchInput.value.toLowerCase().trim();
+            console.log("Search Value:", searchValue);  // Debugging
+
+            jobs.forEach(job => {
+                let jobTitle = job.querySelector(".job-title").textContent.toLowerCase();
+                let companyName = job.querySelector(".company-name").textContent.toLowerCase();
+                let location = job.querySelector(".job-location").textContent.toLowerCase();
+
+                if (jobTitle.includes(searchValue) || companyName.includes(searchValue) || location.includes(searchValue)) {
+                    job.style.display = "flex";
+                } else {
+                    job.style.display = "none";
+                }
+            });
+        });
+    });
+</script>
