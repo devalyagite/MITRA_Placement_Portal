@@ -20,11 +20,6 @@ A web-based portal designed to streamline the placement process for students and
 - Admin Module
 - Student/User Module
 
-## 📷 Screenshots
-
-![Homepage](https://github.com/user-attachments/assets/bd9aa461-0456-4b2f-b77d-35d7f7f9600c)
-
-
 ## 🧑‍💻 How to Run
 
 # 1. Clone the repository
@@ -45,3 +40,7 @@ pip install -r requirements.txt
 python app.py              # For Flask
 # OR
 python manage.py runserver # For Django
+
+## 📷 Screenshots
+
+![Homepage](https://github.com/user-attachments/assets/bd9aa461-0456-4b2f-b77d-35d7f7f9600c)
