@@ -22,20 +22,26 @@ A web-based portal designed to streamline the placement process for students and
 
 ## 📷 Screenshots
 
-_Add screenshots here if available_
+![Homepage](https://github.com/user-attachments/assets/bd9aa461-0456-4b2f-b77d-35d7f7f9600c)
+
 
 ## 🧑‍💻 How to Run
 
-```bash
-# Clone the repo
+# 1. Clone the repository
 git clone https://github.com/devalyagite/MITRA_Placement_Portal.git
 
-# Navigate to project
+# 2. Navigate into the project directory
 cd MITRA_Placement_Portal
 
-# (Optional) Activate virtual environment
-source .venv/bin/activate   # Linux/Mac
-.venv\Scripts\activate      # Windows
+# 3. (Optional) Create and activate virtual environment
+python -m venv .venv
+.venv\Scripts\activate     # Windows
+source .venv/bin/activate  # macOS/Linux
 
-# Run the server
-python manage.py runserver
+# 4. Install dependencies
+pip install -r requirements.txt
+
+# 5. Run the application
+python app.py              # For Flask
+# OR
+python manage.py runserver # For Django
